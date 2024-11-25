@@ -6,6 +6,7 @@ import path from "path"
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
+  base: '/', // Asegúrate de usar '/' si estás en la raíz
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
