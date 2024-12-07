@@ -219,7 +219,7 @@ const Register: React.FC = () => {
       console.log("Redirigiendo al inicio de sesión...");
 
       try {
-        const response = await fetch("http://localhost:3000/saveData", {
+        const response = await fetch("https://thebegin-backend.vercel.app/saveData", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

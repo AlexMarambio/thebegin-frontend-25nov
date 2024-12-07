@@ -36,7 +36,7 @@ export default function ArtisticProfile() {
       // Fetch user data from the server
       const fetchUserData = async () => {
         try {
-          const response = await fetch(`http://localhost:3000/getUser/${username}`)
+          const response = await fetch(`https://thebegin-backend.vercel.app/getUser/${username}`)
           if (!response.ok) {
             throw new Error("Usuario no encontrado o error en el servidor")
           }
