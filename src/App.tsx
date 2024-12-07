@@ -1,5 +1,4 @@
 // src/App.tsx
-import {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Marketplace from "./pages/Marketplace";
 import Trueque from "./pages/Trueque";
@@ -12,22 +11,14 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import Tecito from "./pages/Tecito";
-import MatchPage from './pages/MatchPage'
 import Profile from "./pages/Profile1";
 import Profile2 from "./pages/Profile2";
 import BeginFest from "./pages/BeginFest";
+import ArtisticProfile from "./pages/DefaultProfile";
 
 // Mantener el orden, ty
 
 const App: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect(() => {
-    // Aqui verificamos si hay token, despúes hay que implementar para validar si el token esta vigente -> TO-DO
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, []);
 
   return (
     <Router>
@@ -152,16 +143,6 @@ const App: React.FC = () => {
             </>
           }
         />
-        {/* Ruta de comunidad */}
-        <Route
-          path="/comunidad"
-          element={
-            <>
-              {isLoggedIn && <MatchPage/>}
-              <PageTitle title="Comunidad" />
-            </>
-          }
-        />
         {/* Ruta de BeginFest */}
         <Route
           path="/begin-fest"
@@ -169,6 +150,16 @@ const App: React.FC = () => {
             <>
               <BeginFest/>
               <PageTitle title="Begin Fest" />
+            </>
+          }
+        />
+        {/* Ruta de mi-perfil */}
+        <Route
+          path="/mi-perfil"
+          element={
+            <>
+              <ArtisticProfile/>
+              <PageTitle title="Perfil" />
             </>
           }
         />

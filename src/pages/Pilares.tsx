@@ -2,20 +2,38 @@ import React, { useEffect, useState } from "react";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer/Footer';
 import PageSeparator from '../components/PageSeparator';
-import backgroundImage from '../assets/background-marketplace.svg'
 import PilaresCard from "../components/PilaresInfo/PilaresCard";
 import imageTemp from "../assets/Home/pd21-34-07-kwan-a-1.jpg";
 import iconCard from "../assets/icons/tb-icon-fill-lightBrown.png";
-import imageTempNuestrosPilares from "../assets/Home/hands.jpg";
+import Match from "../components/Match/Match";
+import Banner from "../components/Match/Banner";
+import  {SearchBar2} from "../components/SearchBar/Bar2";
+import { ActivityHeader } from "../components/Match/ActivityHeader";
+import backgroundImage from "../assets/background-home.svg";
+import videoPilares from "../assets/Pilares/pilares_720p.mp4";
 
 const Pilares: React.FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    // Aqui verificamos si hay token, despúes hay que implementar para validar si el token esta vigente -> TO-DO
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (value: string) => {
+    setSearchQuery(value);
+  };
 
   const [isNavbarFixed, setIsNavbarFixed] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
       const videoHeight =
-        document.getElementById("home-video")?.clientHeight || 0;
+        document.getElementById("pilaresvideo")?.clientHeight || 0;
       if (window.scrollY > videoHeight) {
         setIsNavbarFixed(false);
       } else {
@@ -31,6 +49,8 @@ const Pilares: React.FC = () => {
 
 
   return (
+    <>
+    
     <div className='flex flex-col min-h-screen'
     style={{
         backgroundImage: `url(${backgroundImage})`,
@@ -41,12 +61,14 @@ const Pilares: React.FC = () => {
         <Navbar />
       </div>
 
-      <div className="relative bg-white border border-gray-200 mt-10 mb-10 h-auto pt-4 flex flex-wrap">
-          <img 
-            src={imageTempNuestrosPilares}
-            alt="Imagen Temporal"
-            className="w-full md:w-1/2 h-64 md:h-full object-cover"
-          />
+      <div className="relative bg-white border border-gray-200 mt-10 mb-10 h-auto pt-20 flex flex-wrap">
+          <video
+          src={videoPilares}
+          autoPlay
+          muted
+          loop
+          className="w-full md:w-1/2 h-64 md:h-full object-cover"
+        ></video>
           <div className="w-full md:w-1/2 flex flex-col items-start justify-center pl-6 md:pl-16 pr-6 md:pr-12 py-6">
             <h1 className="text-tbc-primarybrown-400 text-3xl md:text-5xl font-serif font-semibold mb-4 md:mb-6">
               Nuestros Pilares
@@ -147,9 +169,32 @@ Talleres y cursos,
 Asesorías."
     />
   </div>
-</div>      
+</div>  
+
+      { isLoggedIn && <div className="flex-1">
+        {/* Banner Section */}
+        <Banner />
+
+        {/* Main Content */}
+        <div className="max-w-7xl mx-auto px-4 py-5">
+          {/* Search Bar */}
+          <SearchBar2 onSearch={handleSearch}/>
+
+          {/* Activity Header */}
+          <ActivityHeader matchCount={7} />
+
+          {/* Matches Grid */}
+          <div className="flex flex-col md:flex-row flex-1">
+            <div className="w-full">
+              <Match searchQuery={searchQuery} />
+            </div>
+          </div>
+        </div>
+      </div>}
+    
       <Footer />
     </div>
+    </>
   );
 };
 

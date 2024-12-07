@@ -30,14 +30,16 @@ const Navbar: React.FC = () => {
     <nav className="border-gray-200 bg-tbc-pilarorange-600">
       {/*padre*/}
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        {/* Logo */}
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse w-10 md:w-32">
           <img src={tbIcon} className="h-16" alt="The Begin Logo" />
           <span className="self-center text-2xl whitespace-nowrap">
             <span className="font-thin text-white">The</span>
             <span className="text-white">Begin</span>
           </span>
         </a>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        
+        <div className="flex xl:order-2 space-x-3 xl:space-x-0 rtl:space-x-reverse">
           {isLoggedIn ? (
             <a
               href="/mi-perfil"
@@ -56,7 +58,7 @@ const Navbar: React.FC = () => {
           <button
             onClick={toggleMenu}
             type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-[#a56441] dark:focus:ring-white"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg xl:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-[#a56441] dark:focus:ring-white"
             aria-controls="navbar-cta"
             aria-expanded={isMenuOpen}
           >
@@ -81,10 +83,10 @@ const Navbar: React.FC = () => {
         <div
           className={`items-center justify-between ${
             isMenuOpen ? "block" : "hidden"
-          } w-full md:flex md:w-auto md:order-1`}
+          } w-full xl:flex xl:w-auto xl:order-1`}
           id="navbar-cta"
         >
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-[#D1B190] md:bg-tbc-pilarorange-600">
+          <ul className="flex flex-col font-medium p-4 xl:p-0 mt-4 border border-gray-100 rounded-lg  xl:space-x-8 rtl:space-x-reverse xl:flex-row xl:mt-0 xl:border-0 bg-tbc-pilarorange-500 xl:bg-tbc-pilarorange-600">
             <li>
               <a
                 href="/"
@@ -103,17 +105,6 @@ const Navbar: React.FC = () => {
                 THE BEGIN
               </a>
             </li>
-            {isLoggedIn && (
-              <li>
-              <a
-                href="/comunidad"
-                className={`block py-2 px-3 md:p-0 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#7c513a] transition-colors duration-300 ease-in-out`}
-                style={isActive("/comunidad") ? activeStyle : {}}
-              >
-                COMUNIDAD
-              </a>
-            </li>
-            )}
             <li>
               <a
                 href="/pilares"
